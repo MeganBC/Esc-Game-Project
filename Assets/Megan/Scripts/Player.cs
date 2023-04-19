@@ -17,12 +17,14 @@ public class Player : MonoBehaviour
 
     private float horizontal;
     private float vertical;
+    Vector2 checkpointPosition;
 
 
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        checkpointPosition = transform.position;
     }
 
 
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Death"))
         {
             body.velocity = Vector2.zero;
+            transform.position = checkpointPosition;
         }
     }
     
@@ -71,6 +74,13 @@ public class Player : MonoBehaviour
                     currentJumps = 0;
                 }
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("CheckPoint"))
+        {
+            checkpointPosition = collision.gameObject.transform.position;
         }
     }
 }
