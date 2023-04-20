@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D body;
     Vector2 horizontalForce, verticalForce;
+    private TrailRenderer trailRenderer;
 
     public float movementSpeed;
     public float jumpForce;
@@ -19,11 +20,19 @@ public class Player : MonoBehaviour
     private float vertical;
     Vector2 checkpointPosition;
 
+    // Dash variables
+    public float dashingVelocity = 14f;
+    private float dashingTime = 0.5f;
+    private Vector2 dashingDirection;
+    private bool isDashing;
+    private bool canDash =true;
+
 
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        trailRenderer = GetComponent<TrailRenderer>();
         checkpointPosition = transform.position;
     }
 
@@ -33,6 +42,8 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         horizontalForce.x = horizontal * movementSpeed * Time.deltaTime * 100;
         body.AddForce(horizontalForce);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
 
         if (Input.GetKeyDown(KeyCode.Space) && currentJumps <= maxJumps)
         {
@@ -40,6 +51,25 @@ public class Player : MonoBehaviour
             body.AddForce(verticalForce, ForceMode2D.Impulse);
             currentJumps++;
             isOnGround = false;
+        }
+
+        // Dash Stuff
+        bool dashInput = Input.GetButtonDown("Dash");
+        if (dashInput && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            trailRenderer.emitting = true;
+            dashingDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            StartCoroutine(StopDashing());
+        }
+        if (isDashing)
+        {
+            body.velocity = dashingDirection * dashingVelocity;
+        }
+        if (isOnGround == true)
+        {
+            canDash = true;
         }
         
     }
@@ -82,6 +112,12 @@ public class Player : MonoBehaviour
         {
             checkpointPosition = collision.gameObject.transform.position;
         }
+    }
+  private IEnumerator StopDashing()
+    {
+        yield return new WaitForSeconds(dashingTime);
+        trailRenderer.emitting = false;
+        isDashing = false;
     }
 }
 
