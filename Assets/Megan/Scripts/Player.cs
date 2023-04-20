@@ -44,15 +44,22 @@ public class Player : MonoBehaviour
         body.AddForce(horizontalForce);
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
+        bool jumpInputReleased = Input.GetButtonUp("Jump");
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentJumps <= maxJumps)
+        if (Input.GetButtonDown("Jump") && currentJumps <= maxJumps && isOnGround == true)
         {
             verticalForce.y = jumpForce;
-            body.AddForce(verticalForce, ForceMode2D.Impulse);
+            body.velocity = new Vector2(body.velocity.x, jumpForce);
             currentJumps++;
             isOnGround = false;
+
+
         }
 
+        if (jumpInputReleased && body.velocity.y > 0)
+        {
+            body.velocity = new Vector2(body.velocity.x, 0);
+        }
         // Dash Stuff
         bool dashInput = Input.GetButtonDown("Dash");
         if (dashInput && canDash)
