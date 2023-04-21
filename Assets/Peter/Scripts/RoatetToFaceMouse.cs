@@ -34,7 +34,7 @@ public class RoatetToFaceMouse : MonoBehaviour
             bulletObject.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
         }
 
-        if(transform.rotation.z > 0)
+        if(mousePosition.x < 0)
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;
