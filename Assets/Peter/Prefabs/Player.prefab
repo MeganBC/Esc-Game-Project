@@ -163,7 +163,7 @@ MonoBehaviour:
   attachPoint: {fileID: 4128107671231551113}
   bullet: {fileID: 5697560565969760183, guid: 59776694ed5544c4bb70253515167117, type: 3}
   spawnPoint: {fileID: 4128107670807531983}
-  bulletSpeed: 20
+  bulletSpeed: 30
 --- !u!1 &4128107672422087628
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,4 +304,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   jumpForce: 10
-  isOnGround: 0
+  maxJumps: 1
+  maxSlope: 0.5
