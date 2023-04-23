@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     private TrailRenderer trailRenderer;
 
     public float movementSpeed;
+    public float maxMovementSpeed;
     public float jumpForce;
-    public int maxJumps = 2;
+    public float maxAirSpeed;
+    public int maxJumps = 1;
 
     int currentJumps = 0;
     bool isOnGround;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         bool jumpInputReleased = Input.GetButtonUp("Jump");
+       
 
         if (Input.GetButtonDown("Jump") && currentJumps <= maxJumps && isOnGround == true)
         {
@@ -52,8 +55,6 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             currentJumps++;
             isOnGround = false;
-
-
         }
 
         if (jumpInputReleased && body.velocity.y > 0)
@@ -77,8 +78,16 @@ public class Player : MonoBehaviour
         if (isOnGround == true)
         {
             canDash = true;
+            body.velocity = Vector2.ClampMagnitude(body.velocity, maxMovementSpeed);
         }
-        
+        else
+            body.velocity = Vector2.ClampMagnitude(body.velocity, maxAirSpeed);
+
+        if (horizontal == 0 && isOnGround)
+        {
+            body.velocity = new Vector2(0, body.velocity.y);
+        }
+
     }
     bool CanJump()
     {

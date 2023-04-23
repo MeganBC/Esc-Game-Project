@@ -101,7 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  jumpForce: 7
+  maxMovementSpeed: 10
+  jumpForce: 10
+  maxAirSpeed: 20
+  maxJumps: 1
   maxSlope: 0.5
   dashingVelocity: 7
 --- !u!50 &6809101682015757391
