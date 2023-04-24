@@ -7,6 +7,14 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Invoke("CleanUp", 2);
+
+        //mouse position
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        //direction between the bullet and the mouse
+        Vector3 direction = mousePosition - transform.position;
+        //rotate to face that direction
+        transform.right = direction;
     }
 
     void CleanUp()
@@ -21,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!collision.gameObject.CompareTag("Player"))
+        if(!collision.gameObject.CompareTag("Player") || !collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
         }
