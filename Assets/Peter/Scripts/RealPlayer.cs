@@ -39,7 +39,7 @@ public class RealPlayer : MonoBehaviour
             body.velocity = Vector2.ClampMagnitude(body.velocity, maxMovementSpeed);
         else
             body.velocity = Vector2.ClampMagnitude(body.velocity, maxAirSpeed);
-
+        //stop moving if direction is not held, only on ground
         if (horizontal == 0 && isOnGround)
         {
             body.velocity = new Vector2(0, body.velocity.y);
