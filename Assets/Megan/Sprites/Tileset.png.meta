@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -91,6 +91,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -999,7 +1023,6 @@ TextureImporter:
     nameFileIdTable:
       Tileset_3: -1975238757
       Tileset_12: 648340066
-      Tileset_41: -1887152179
       Tileset_4: -1334690650
       Tileset_17: 1589009284
       Tileset_18: 1039306771
@@ -1008,6 +1031,7 @@ TextureImporter:
       Tileset_27: 734434169
       Tileset_10: -1750753434
       Tileset_37: -1888009495
+      Tileset_34: -443076662
       Tileset_31: -405260796
       Tileset_14: -5372645
       Tileset_23: 1566017267
@@ -1035,9 +1059,9 @@ TextureImporter:
       Tileset_21: -1694004682
       Tileset_9: -1094558860
       Tileset_0: 849252506
-      Tileset_30: -853021538
       Tileset_39: 1211513099
-      Tileset_34: -443076662
+      Tileset_30: -853021538
+      Tileset_41: -1887152179
       Tileset_7: 969943111
   spritePackingTag: 
   pSDRemoveMatte: 0
