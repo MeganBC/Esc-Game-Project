@@ -42,6 +42,7 @@ public class RoatetToFaceMouse : MonoBehaviour
             Invoke("ResetCooldown", cooldown);
         }
 
+        //rotate sprite
         if (mousePosition.x < attachPoint.position.x)
             spriteRenderer.flipX = true;
         else
@@ -55,9 +56,10 @@ public class RoatetToFaceMouse : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //random ammo amount
         if(collision.gameObject.CompareTag("Ammo"))
         {
-            ammo += Random.RandomRange(3, 5);
+            ammo += Random.Range(3, 5);
             Destroy(collision.gameObject);
         }
     }

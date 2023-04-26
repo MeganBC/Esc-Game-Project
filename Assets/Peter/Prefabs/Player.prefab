@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3795222184372389648}
   - component: {fileID: 1942699662244873060}
   - component: {fileID: 7169039868238653165}
-  - component: {fileID: 5103998959168052582}
+  - component: {fileID: 1283183345}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -102,10 +102,11 @@ MonoBehaviour:
   attachPoint: {fileID: 4128107671231551113}
   bullet: {fileID: 5697560565969760183, guid: 59776694ed5544c4bb70253515167117, type: 3}
   spawnPoint: {fileID: 6830140077651965164}
-  bulletSpeed: 40
+  bulletSpeed: 20
+  ammo: 15
   cooldown: 0.4
---- !u!58 &5103998959168052582
-CircleCollider2D:
+--- !u!70 &1283183345
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,9 +118,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 16
+  m_Offset: {x: -0.0000010217939, y: 0}
+  m_Size: {x: 5.7422376, y: 11.306711}
+  m_Direction: 0
 --- !u!1 &4128107671231551118
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +296,7 @@ MonoBehaviour:
   jumpForce: 10
   maxJumps: 1
   maxSlope: 0.5
+  dropDown: 0
 --- !u!1 &4853945321127081402
 GameObject:
   m_ObjectHideFlags: 0
