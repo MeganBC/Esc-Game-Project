@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
+    // I used a tutorial for the parralax effect
     Material mat;
     float distance;
 

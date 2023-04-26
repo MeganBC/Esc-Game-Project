@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, 0);
         }
         // Dash Stuff
+        // I got this from a tutorial on youtube
         bool dashInput = Input.GetButtonDown("Dash");
         if (dashInput && canDash)
         {

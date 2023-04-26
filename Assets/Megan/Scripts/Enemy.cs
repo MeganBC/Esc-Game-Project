@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int enemyDamage;
-    float movementSpeed;
-    public float MinMovementSpeed = 1;
-    public float MaxMovementSpeed = 3;
-    public float attackRange = 5 ;
+    private float direction;
+    private float movementSpeed;
     private Rigidbody2D body;
-    GameObject player;
-
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        movementSpeed = Random.Range(MinMovementSpeed, MaxMovementSpeed);
-
+        direction = -1f;
+        movementSpeed = 4f;
     }
-
-
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < attackRange )
+        if (collision.gameObject.CompareTag("Bounce"))
         {
-            transform.up = player.transform.position - transform.position;
-            Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed);
+           direction *= -1f;
         }
+
+        if (direction < 0f)
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction > 0f)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+
+        }
+    }
+    private void FixedUpdate()
+    {
+        body.velocity = new Vector2(direction * movementSpeed, body.velocity.y);   
     }
 }
