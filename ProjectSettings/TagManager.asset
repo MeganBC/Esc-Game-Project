@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Ammo
+  - Stairs
   layers:
   - Default
   - TransparentFX

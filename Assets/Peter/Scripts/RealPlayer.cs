@@ -19,6 +19,7 @@ public class RealPlayer : MonoBehaviour
 
     private float horizontal;
     private float vertical;
+    public bool dropDown;
     Vector2 checkpointPosition;
 
     void Start()
@@ -57,11 +58,32 @@ public class RealPlayer : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, 0);
         }
+
+        vertical = Input.GetAxisRaw("Vertical");
+        if(vertical < 0)
+        {
+            dropDown = true;
+        }
+        else
+        {
+            dropDown = false;
+        }
     }
 
     bool CanJump()
     {
         return isOnGround || currentJumps < maxJumps;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Stairs"))
+        {
+            if(dropDown)
+            {
+                collision.collider.isTrigger = true;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,9 +119,17 @@ public class RealPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("CheckPoint"))
+        /*if (collision.gameObject.CompareTag("CheckPoint"))
         {
             checkpointPosition = collision.gameObject.transform.position;
+        }*/
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Stairs"))
+        {
+            collision.isTrigger = false;
         }
     }
 }
