@@ -5,8 +5,10 @@ using UnityEngine;
 public class RealPlayer : MonoBehaviour
 {
     private Rigidbody2D body;
-    Vector2 horizontalForce, verticalForce;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
 
+    Vector2 horizontalForce, verticalForce;
     public float movementSpeed;
     public float maxMovementSpeed;
     public float maxAirSpeed;
@@ -25,6 +27,8 @@ public class RealPlayer : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         checkpointPosition = transform.position;
     }
 
@@ -67,6 +71,27 @@ public class RealPlayer : MonoBehaviour
         else
         {
             dropDown = false;
+        }
+
+        if(body.velocity.x == 0 && isOnGround)
+        {
+            animator.Play("PlayerIdle");
+        }
+        if(body.velocity.x != 0 && isOnGround)
+        {
+            animator.Play("PlayerWalk");
+        }
+        if(body.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        if(body.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        if(!isOnGround)
+        {
+            animator.Play("PlayerJump");
         }
     }
 

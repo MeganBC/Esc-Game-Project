@@ -7,9 +7,12 @@ public class RoatetToFaceMouse : MonoBehaviour
     public Transform attachPoint;
     public GameObject bullet;
     public Transform spawnPoint;
-    public float bulletSpeed = 40;
+    public float bulletSpeed = 20;
     SpriteRenderer spriteRenderer;
     public float ammo = 15;
+
+    public GameObject melee;
+    public float meleeDestroy;
 
     public float cooldown = .1f;
     bool isInCooldown = false;
@@ -32,7 +35,7 @@ public class RoatetToFaceMouse : MonoBehaviour
 
         transform.position = attachPoint.position;
 
-        if (Input.GetButton("Fire1") && !isInCooldown && ammo > 0)
+        if(Input.GetButton("Fire1") && !isInCooldown && ammo > 0)
         {
             GameObject bulletObject = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
             bulletObject.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
@@ -47,6 +50,14 @@ public class RoatetToFaceMouse : MonoBehaviour
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;
+
+        melee.transform.position = attachPoint.position;
+        melee.transform.right = direction;
+
+        if(Input.GetButtonDown("Fire2"))
+        {
+            Instantiate(melee);
+        }
     }
 
     void ResetCooldown()
