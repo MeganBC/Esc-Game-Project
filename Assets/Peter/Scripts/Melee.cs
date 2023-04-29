@@ -5,23 +5,52 @@ using UnityEngine;
 public class Melee : MonoBehaviour
 {
     public float time = 0.5f;
-    bool exists;
+    public Transform attachPoint;
+    SpriteRenderer spriteRenderer;
+    Collider2D col;
+    Rigidbody2D body;
+    public bool isActive;
 
     void Start()
     {
-        Invoke("CleanUp", 0);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        body = GetComponent<Rigidbody2D>();
     }
 
-    void CleanUp()
+    void Update()
     {
-        Destroy(gameObject, time);
-    }
+        //mouse position
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        //direction between the gun and the mouse
+        Vector3 direction = mousePosition - transform.position;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Bullet"))
+        //rotate to face that direction
+        transform.right = direction;
+
+        transform.position = attachPoint.position;
+
+        if(isActive)
         {
-            Destroy(collision.gameObject);
+            spriteRenderer.enabled = true;
+            col.enabled = true;
         }
+        else
+        {
+            spriteRenderer.enabled = false;
+            col.enabled = false;
+        }
+
+        if(Input.GetButtonDown("Fire2"))
+        {
+            Invoke("Attack", time);
+            isActive = true;
+        }
+    }
+
+    void Attack()
+    {
+        isActive = false;
     }
 }

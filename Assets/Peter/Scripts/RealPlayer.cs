@@ -22,6 +22,7 @@ public class RealPlayer : MonoBehaviour
     private float horizontal;
     private float vertical;
     public bool dropDown;
+    public float health = 100;
     Vector2 checkpointPosition;
 
     void Start()
@@ -100,17 +101,6 @@ public class RealPlayer : MonoBehaviour
         return isOnGround || currentJumps < maxJumps;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Stairs"))
-        {
-            if(dropDown)
-            {
-                collision.collider.isTrigger = true;
-            }
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckIfOnGround(collision);
@@ -121,6 +111,17 @@ public class RealPlayer : MonoBehaviour
             transform.position = checkpointPosition;
         }
         */
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Stairs"))
+        {
+            if(dropDown)
+            {
+                collision.collider.isTrigger = true;
+            }
+        }
     }
 
     void CheckIfOnGround(Collision2D collision)
@@ -144,10 +145,21 @@ public class RealPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.gameObject.CompareTag("CheckPoint"))
+        if (collision.gameObject.CompareTag("CheckPoint"))
         {
             checkpointPosition = collision.gameObject.transform.position;
-        }*/
+        }
+
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            health =- Random.Range(15, 25);
+        }
+
+        if(collision.gameObject.CompareTag("Health"))
+        {
+            health += Random.Range(20, 40);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

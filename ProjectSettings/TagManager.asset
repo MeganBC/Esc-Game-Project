@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Ammo
   - Stairs
+  - Melee
+  - CheckPoint
+  - Health
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,6 @@ public class RoatetToFaceMouse : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float ammo = 15;
 
-    public GameObject melee;
-    public float meleeDestroy;
-
     public float cooldown = .1f;
     bool isInCooldown = false;
 
@@ -50,14 +47,6 @@ public class RoatetToFaceMouse : MonoBehaviour
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;
-
-        melee.transform.position = attachPoint.position;
-        melee.transform.right = direction;
-
-        if(Input.GetButtonDown("Fire2"))
-        {
-            Instantiate(melee);
-        }
     }
 
     void ResetCooldown()
