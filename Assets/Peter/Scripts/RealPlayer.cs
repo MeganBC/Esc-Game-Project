@@ -23,6 +23,7 @@ public class RealPlayer : MonoBehaviour
     private float vertical;
     public bool dropDown;
     public float health = 100;
+    public const float maxHealth = 100;
     Vector2 checkpointPosition;
 
     void Start()
@@ -94,6 +95,11 @@ public class RealPlayer : MonoBehaviour
         {
             animator.Play("PlayerJump");
         }
+
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     bool CanJump()
@@ -104,13 +110,11 @@ public class RealPlayer : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckIfOnGround(collision);
-        /*
-        if (collision.gameObject.CompareTag("Death"))
+        if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             body.velocity = Vector2.zero;
             transform.position = checkpointPosition;
         }
-        */
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -150,7 +154,7 @@ public class RealPlayer : MonoBehaviour
             checkpointPosition = collision.gameObject.transform.position;
         }
 
-        if(collision.gameObject.CompareTag("Bullet"))
+        if(collision.gameObject.CompareTag("EnemyBullet"))
         {
             health =- Random.Range(15, 25);
         }
