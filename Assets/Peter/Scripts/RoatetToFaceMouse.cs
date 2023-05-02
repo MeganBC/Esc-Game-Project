@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RoatetToFaceMouse : MonoBehaviour
@@ -10,6 +11,7 @@ public class RoatetToFaceMouse : MonoBehaviour
     public float bulletSpeed = 20;
     SpriteRenderer spriteRenderer;
     public float ammo = 15;
+    public TMPro.TMP_Text ammoText;
 
     public float cooldown = .1f;
     bool isInCooldown = false;
@@ -17,6 +19,7 @@ public class RoatetToFaceMouse : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        ammoText = GetComponent<TMP_Text>();
     }
 
     void Update()
@@ -47,6 +50,8 @@ public class RoatetToFaceMouse : MonoBehaviour
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;
+
+        ammoText.text = ammo.ToString();
     }
 
     void ResetCooldown()

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyWeapon : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
     public GameObject enemyBullet;
     SpriteRenderer spriteRenderer;
     public Transform attachPoint;
@@ -19,6 +19,7 @@ public class EnemyWeapon : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -52,7 +53,7 @@ public class EnemyWeapon : MonoBehaviour
         }
 
         //rotate sprite
-        if (transform.position.x < attachPoint.position.x)
+        if (player.transform.position.x <= transform.position.x)
             spriteRenderer.flipX = true;
         else
             spriteRenderer.flipX = false;

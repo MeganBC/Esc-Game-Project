@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    GameObject player;
     public GameObject ammo;
     public GameObject health;
     Rigidbody2D body;
+    SpriteRenderer spriteRenderer;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        
+        if(player.transform.position.x <= transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

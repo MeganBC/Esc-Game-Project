@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RealPlayer : MonoBehaviour
@@ -7,6 +8,7 @@ public class RealPlayer : MonoBehaviour
     private Rigidbody2D body;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    public TMPro.TMP_Text healthText;
 
     Vector2 horizontalForce, verticalForce;
     public float movementSpeed;
@@ -31,6 +33,7 @@ public class RealPlayer : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthText = GetComponent<TMP_Text>();
         checkpointPosition = transform.position;
     }
 
@@ -100,6 +103,13 @@ public class RealPlayer : MonoBehaviour
         {
             health = maxHealth;
         }
+        if(health <= 0)
+        {
+            health = 100;
+            transform.position = checkpointPosition;
+        }
+
+        healthText.text = health.ToString();
     }
 
     bool CanJump()
@@ -113,7 +123,8 @@ public class RealPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             body.velocity = Vector2.zero;
-            transform.position = checkpointPosition;
+            health = -Random.Range(15, 25);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -152,11 +163,6 @@ public class RealPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
             checkpointPosition = collision.gameObject.transform.position;
-        }
-
-        if(collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            health =- Random.Range(15, 25);
         }
 
         if(collision.gameObject.CompareTag("Health"))

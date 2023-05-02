@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3795222184372389648}
   - component: {fileID: 1942699662244873060}
   - component: {fileID: 7169039868238653165}
-  - component: {fileID: 1283183345}
+  - component: {fileID: 4574771528869226643}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -104,9 +104,10 @@ MonoBehaviour:
   spawnPoint: {fileID: 6830140077651965164}
   bulletSpeed: 20
   ammo: 15
+  ammoText: {fileID: 637204854639982406, guid: 81e213613c193fa46bae67c8bdac400c, type: 3}
   cooldown: 0.4
---- !u!70 &1283183345
-CapsuleCollider2D:
+--- !u!58 &4574771528869226643
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,8 +120,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 8.512379, y: 15.469947}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 6.36332
 --- !u!1 &4128107671231551118
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d07f9ae2e0a5f843b2b60ae5756733e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
   movementSpeed: 5
   maxMovementSpeed: 10
   maxAirSpeed: 20
@@ -344,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4853945321127081402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.927, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
