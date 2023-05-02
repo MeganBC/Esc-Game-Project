@@ -9,6 +9,8 @@ public class Turrets : MonoBehaviour
     public GameObject enemyBullet;
     public float enemyBulletSpeed = 15;
     public Transform spawnPoint;
+    private Vector3 direction;
+    public float fireRate = 5f;
 
     void Start()
     {
@@ -18,16 +20,16 @@ public class Turrets : MonoBehaviour
     }
     void Update()
     {
+        direction = player.transform.position - transform.position;
         if (Vector2.Distance(transform.position, player.transform.position) < AttackRange)
         {
-            Shoot();
-            
+            Invoke("Shoot", fireRate);
         }
     }
 
     void Shoot ()
     {
         GameObject bulletObject = Instantiate(enemyBullet, spawnPoint.position, Quaternion.identity);
-        bulletObject.GetComponent<Rigidbody2D>().velocity = transform.up * enemyBulletSpeed;
+        bulletObject.GetComponent<Rigidbody2D>().velocity = direction * enemyBulletSpeed;
     }
 }
