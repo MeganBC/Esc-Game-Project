@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     private bool isDashing;
     private bool canDash =true;
 
+    public float health = 100;
+    public const float maxHealth = 100;
+
 
 
     void Start()
@@ -88,6 +91,12 @@ public class Player : MonoBehaviour
         {
             body.velocity = new Vector2(0, body.velocity.y);
         }
+        if (health <= 0)
+        {
+            body.velocity = Vector2.zero;
+            transform.position = checkpointPosition;
+            health = 100;
+        }
 
     }
     bool CanJump()
@@ -128,6 +137,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
             checkpointPosition = collision.gameObject.transform.position;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health -= Random.Range(15, 25);
+            Destroy(collision.gameObject);
         }
     }
   private IEnumerator StopDashing()
