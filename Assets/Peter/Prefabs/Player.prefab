@@ -104,7 +104,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 6830140077651965164}
   bulletSpeed: 20
   ammo: 15
-  ammoText: {fileID: 637204854639982406, guid: 81e213613c193fa46bae67c8bdac400c, type: 3}
+  ammoText: {fileID: 0}
   cooldown: 0.4
 --- !u!58 &4574771528869226643
 CircleCollider2D:

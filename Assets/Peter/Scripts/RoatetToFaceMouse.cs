@@ -19,7 +19,7 @@ public class RoatetToFaceMouse : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ammoText = GetComponent<TMP_Text>();
+        //ammoText = GetComponent<TMP_Text>();
     }
 
     void Update()

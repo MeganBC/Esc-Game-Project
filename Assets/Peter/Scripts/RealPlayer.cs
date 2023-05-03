@@ -33,7 +33,7 @@ public class RealPlayer : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        healthText = GetComponent<TMP_Text>();
+        //healthText = GetComponent<TMP_Text>();
         checkpointPosition = transform.position;
     }
 
@@ -120,11 +120,11 @@ public class RealPlayer : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckIfOnGround(collision);
+
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
-            body.velocity = Vector2.zero;
-            health = -Random.Range(15, 25);
             Destroy(collision.gameObject);
+            health -= Random.Range(15, 25);
         }
     }
 
