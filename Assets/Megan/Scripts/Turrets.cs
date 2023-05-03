@@ -10,7 +10,9 @@ public class Turrets : MonoBehaviour
     public float enemyBulletSpeed = 15;
     public Transform spawnPoint;
     private Vector3 direction;
-    public float fireRate = 5f;
+
+    public float cooldown = 0.5f;
+    bool isOnCooldown = false;
 
     void Start()
     {
@@ -21,9 +23,9 @@ public class Turrets : MonoBehaviour
     void Update()
     {
         direction = player.transform.position - transform.position;
-        if (Vector2.Distance(transform.position, player.transform.position) < AttackRange)
+        if (Vector2.Distance(transform.position, player.transform.position) < AttackRange && !isOnCooldown) 
         {
-            Invoke("Shoot", fireRate);
+            Shoot();
         }
     }
 
@@ -31,5 +33,12 @@ public class Turrets : MonoBehaviour
     {
         GameObject bulletObject = Instantiate(enemyBullet, spawnPoint.position, Quaternion.identity);
         bulletObject.GetComponent<Rigidbody2D>().velocity = direction * enemyBulletSpeed;
+        isOnCooldown = true;
+        Invoke("resetCooldown", cooldown);
+    }
+
+    private void resetCooldown ()
+    {
+        isOnCooldown = false;
     }
 }

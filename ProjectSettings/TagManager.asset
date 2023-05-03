@@ -8,6 +8,8 @@ TagManager:
   - CheckPoint
   - Enemy
   - Bounce
+  - Enviroment
+  - Bullet
   layers:
   - Default
   - TransparentFX

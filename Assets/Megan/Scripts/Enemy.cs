@@ -31,6 +31,15 @@ public class Enemy : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+
+        }
+    }
     private void FixedUpdate()
     {
         body.velocity = new Vector2(direction * movementSpeed, body.velocity.y);   
