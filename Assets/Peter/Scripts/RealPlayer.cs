@@ -105,7 +105,7 @@ public class RealPlayer : MonoBehaviour
         }
         if(health <= 0)
         {
-            health = 100;
+            health = maxHealth;
             transform.position = checkpointPosition;
         }
 
