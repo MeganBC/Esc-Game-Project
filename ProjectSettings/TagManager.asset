@@ -12,6 +12,8 @@ TagManager:
   - CheckPoint
   - Health
   - EnemyBullet
+  - Boss
+  - SceneChange
   layers:
   - Default
   - TransparentFX

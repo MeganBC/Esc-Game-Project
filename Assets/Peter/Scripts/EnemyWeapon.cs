@@ -17,6 +17,8 @@ public class EnemyWeapon : MonoBehaviour
     public float cooldown = .4f;
     bool isInCooldown = false;
 
+    public AudioSource shoot;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -46,6 +48,7 @@ public class EnemyWeapon : MonoBehaviour
             {
                 GameObject bulletObject = Instantiate(enemyBullet, spawnPoint.position, Quaternion.identity);
                 bulletObject.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
+                shoot.Play();
 
                 isInCooldown = true;
                 Invoke("ResetCooldown", cooldown);

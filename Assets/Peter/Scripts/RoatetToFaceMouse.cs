@@ -16,6 +16,8 @@ public class RoatetToFaceMouse : MonoBehaviour
     public float cooldown = .1f;
     bool isInCooldown = false;
 
+    public AudioSource shoot;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,6 +45,7 @@ public class RoatetToFaceMouse : MonoBehaviour
             ammo--;
             isInCooldown = true;
             Invoke("ResetCooldown", cooldown);
+            shoot.Play();
         }
 
         //rotate sprite
@@ -52,6 +55,9 @@ public class RoatetToFaceMouse : MonoBehaviour
             spriteRenderer.flipX = false;
 
         ammoText.text = ammo.ToString();
+
+        if(transform.position.x >= 210)
+            ammo = 15;
     }
 
     void ResetCooldown()

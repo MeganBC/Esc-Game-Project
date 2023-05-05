@@ -11,6 +11,8 @@ public class Melee : MonoBehaviour
     Rigidbody2D body;
     public bool isActive;
 
+    public AudioSource attack;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,6 +47,7 @@ public class Melee : MonoBehaviour
         if(Input.GetButtonDown("Fire2"))
         {
             Invoke("Attack", time);
+            attack.Play();
             isActive = true;
         }
     }

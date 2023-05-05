@@ -6,6 +6,8 @@ public class EnemyBullet : MonoBehaviour
 {
     GameObject player;
 
+    public AudioSource wallHit;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -28,6 +30,8 @@ public class EnemyBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+            wallHit.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

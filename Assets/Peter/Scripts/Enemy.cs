@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     Rigidbody2D body;
     SpriteRenderer spriteRenderer;
 
+    public AudioSource hit;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(collision.gameObject);
+            hit.Play();
             Destroy(gameObject);
             Instantiate(ammo, body.position, Quaternion.identity);
             float rng = Random.Range(1, 3);
@@ -50,6 +53,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Melee"))
         {
             Destroy(gameObject);
+            hit.Play();
             Instantiate(ammo, body.position, Quaternion.identity);
             float rng = Random.Range(1, 3);
             if (rng == 1)

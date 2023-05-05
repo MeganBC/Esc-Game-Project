@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public AudioSource wallHit;
+
     void Start()
     {
         Invoke("CleanUp", 2);
@@ -32,6 +34,10 @@ public class Bullet : MonoBehaviour
         else if(!collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            wallHit.Play();
         }
     }
 }

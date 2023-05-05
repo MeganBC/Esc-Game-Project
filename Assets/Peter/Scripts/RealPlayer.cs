@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RealPlayer : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class RealPlayer : MonoBehaviour
     public float health = 100;
     public const float maxHealth = 100;
     Vector2 checkpointPosition;
+
+    public AudioSource jump;
+    public AudioSource hit;
 
     void Start()
     {
@@ -61,6 +65,7 @@ public class RealPlayer : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             currentJumps++;
             isOnGround = false;
+            jump.Play();
         }
 
         if (jumpInputReleased && body.velocity.y > 0)
@@ -121,10 +126,17 @@ public class RealPlayer : MonoBehaviour
     {
         CheckIfOnGround(collision);
 
-        if (collision.gameObject.CompareTag("EnemyBullet"))
+        if(collision.gameObject.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
             health -= Random.Range(15, 25);
+            hit.Play();
+        }
+
+        if(collision.gameObject.CompareTag("Boss"))
+        {
+            health -= Random.Range(15, 25);
+            hit.Play();
         }
     }
 
@@ -169,6 +181,11 @@ public class RealPlayer : MonoBehaviour
         {
             health += Random.Range(20, 40);
             Destroy(collision.gameObject);
+        }
+
+        if(collision.gameObject.CompareTag("SceneChange"))
+        {
+            //change scene to menu
         }
     }
 
