@@ -33,11 +33,8 @@ public class Bullet : MonoBehaviour
         }
         else if(!collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-        }
-        else
-        {
             wallHit.Play();
+            Destroy(gameObject);
         }
     }
 }
