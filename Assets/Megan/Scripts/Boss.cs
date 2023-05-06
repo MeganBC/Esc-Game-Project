@@ -2,39 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss: MonoBehaviour
 {
-    GameObject player;
-    public GameObject enemyBullet;
-    public float enemyBulletSpeed = 10;
-    public Transform spawnPoint;
-    private Vector3 direction;
-
-    public float cooldown = 5f;
-    bool isOnCooldown = false;
-
-
-    private void Start()
+    private float direction;
+    public float movementSpeed;
+    private Rigidbody2D body;
+    public float stayStillFor = 5f;
+    bool isWaitingToFlip = false;
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        body = GetComponent<Rigidbody2D>();
+        direction = 1f;
+        movementSpeed = 5f;
     }
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        direction = player.transform.position - transform.position;
-        if (!isOnCooldown)
+        if (collision.gameObject.CompareTag("Bounce"))
         {
-            Shoot();
+            if (!isWaitingToFlip)
+            {
+                if (direction < 0)
+                {
+                    Invoke("FlipDirection", stayStillFor);
+                    isWaitingToFlip = true;
+                }
+                else
+                    FlipDirection();
+            }
         }
     }
-    void Shoot()
+    private void Update()
     {
-        GameObject bulletObject = Instantiate(enemyBullet, spawnPoint.position, Quaternion.identity);
-        bulletObject.GetComponent<Rigidbody2D>().velocity = direction * enemyBulletSpeed;
-        isOnCooldown = true;
-        Invoke("resetCooldown", cooldown);
+        body.velocity = new Vector2(body.velocity.x, direction * movementSpeed);
     }
-    private void resetCooldown()
+
+    void FlipDirection()
     {
-        isOnCooldown = false;
+        direction *= -1f;
+        isWaitingToFlip = false;
     }
 }

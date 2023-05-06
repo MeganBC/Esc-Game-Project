@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Burst.CompilerServices;
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D body;
     Vector2 horizontalForce, verticalForce;
     private TrailRenderer trailRenderer;
+    Animator animator;
+   public SpriteRenderer spriteRenderer;
+
+    public AudioSource jump;
+    public AudioSource hit;
 
     public float movementSpeed;
     public float maxMovementSpeed;
@@ -39,6 +45,7 @@ public class Player : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         trailRenderer = GetComponent<TrailRenderer>();
         checkpointPosition = transform.position;
+        animator = GetComponent<Animator>();
     }
 
 
@@ -58,8 +65,24 @@ public class Player : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             currentJumps++;
             isOnGround = false;
+            jump.Play();
         }
-
+        if (body.velocity.x == 0 && isOnGround)
+        {
+            animator.Play("IdlePlayer");
+        }
+        if (body.velocity.x != 0 && isOnGround)
+        {
+            animator.Play("PlayerRun");
+        }
+        if (body.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        if (body.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
         if (jumpInputReleased && body.velocity.y > 0)
         {
             body.velocity = new Vector2(body.velocity.x, 0);
@@ -74,6 +97,7 @@ public class Player : MonoBehaviour
             trailRenderer.emitting = true;
             dashingDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             StartCoroutine(StopDashing());
+            jump.Play();
         }
         if (isDashing)
         {
@@ -111,6 +135,7 @@ public class Player : MonoBehaviour
         {
             body.velocity = Vector2.zero;
             transform.position = checkpointPosition;
+            hit.Play();
         }
     }
     
@@ -142,6 +167,7 @@ public class Player : MonoBehaviour
         {
             health -= Random.Range(15, 25);
             Destroy(collision.gameObject);
+            hit.Play();
         }
     }
   private IEnumerator StopDashing()
