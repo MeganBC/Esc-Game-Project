@@ -52,8 +52,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Melee"))
         {
-            Destroy(gameObject);
             hit.Play();
+            Destroy(gameObject);
             Instantiate(ammo, body.position, Quaternion.identity);
             float rng = Random.Range(1, 3);
             if (rng == 1)

@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
-    public Scene nextScene;
-
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
-            SceneManager.LoadScene(nextScene.name);
+            SceneManager.LoadScene("Cutscene1");
     }
 }

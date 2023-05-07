@@ -185,7 +185,7 @@ public class RealPlayer : MonoBehaviour
 
         if(collision.gameObject.CompareTag("SceneChange"))
         {
-            //change scene to menu
+            SceneManager.LoadScene("Victory");
         }
     }
 
