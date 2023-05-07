@@ -30,9 +30,6 @@ public class Enemy : MonoBehaviour
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
 
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
         if(collision.gameObject.CompareTag("Bullet"))
         {
             Destroy(collision.gameObject);

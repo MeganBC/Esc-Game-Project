@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
+
 
 public class Boss: MonoBehaviour
 {
@@ -33,6 +35,12 @@ public class Boss: MonoBehaviour
                     FlipDirection();
             }
         }
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            health -= Random.Range(15, 20);
+
+        }
     }
     private void Update()
     {
@@ -41,21 +49,17 @@ public class Boss: MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            LoadScene("LevelComplete");
+           
         }
     }
-
+     public void LoadScene(string sceneName)
+            {
+                SceneManager.LoadScene(sceneName);
+            }
     void FlipDirection()
     {
         direction *= -1f;
         isWaitingToFlip = false;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(collision.gameObject);
-            health -= Random.Range(15, 20);
-
-        }
     }
 }

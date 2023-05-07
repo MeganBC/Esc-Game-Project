@@ -372,4 +372,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   stayStillFor: 2
-  health: 200
+  health: 500

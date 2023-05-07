@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BigBattery : MonoBehaviour
@@ -30,6 +31,12 @@ public class BigBattery : MonoBehaviour
                 else
                     FlipDirection();
             }
+        } 
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            health -= Random.Range(15, 20);
+
         }
     }
     private void Update()
@@ -46,13 +53,5 @@ public class BigBattery : MonoBehaviour
         direction *= -1f;
         isWaitingToFlip = false;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(collision.gameObject);
-            health -= Random.Range(15, 20);
-
-        }
-    }
+    
 }

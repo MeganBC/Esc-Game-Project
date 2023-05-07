@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Unity.Burst.CompilerServices;
 
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
 
     public float health = 100;
     public const float maxHealth = 100;
-
+    public TMPro.TMP_Text healthText;
 
 
     void Start()
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         bool jumpInputReleased = Input.GetButtonUp("Jump");
-       
+        healthText.text = health.ToString();
 
         if (Input.GetButtonDown("Jump") && currentJumps <= maxJumps && isOnGround == true)
         {
@@ -135,6 +136,7 @@ public class Player : MonoBehaviour
         {
             body.velocity = Vector2.zero;
             transform.position = checkpointPosition;
+            health = 100;
             hit.Play();
         }
     }
