@@ -9,6 +9,7 @@ public class BigBattery : MonoBehaviour
     private Rigidbody2D body;
     public float stayStillFor = 5f;
     bool isWaitingToFlip = false;
+    public float health = 50;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -34,11 +35,24 @@ public class BigBattery : MonoBehaviour
     private void Update()
     {
         body.velocity = new Vector2( body.velocity.x, direction * movementSpeed);
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FlipDirection()
     {
         direction *= -1f;
         isWaitingToFlip = false;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            health -= Random.Range(15, 20);
+
+        }
     }
 }

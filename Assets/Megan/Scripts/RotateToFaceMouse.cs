@@ -9,9 +9,10 @@ public class RotateToFaceMouse : MonoBehaviour
     public Transform spawnPoint;
     public float bulletSpeed = 20;
     SpriteRenderer spriteRenderer;
-    public float ammo = 15;
 
-    public float cooldown = .1f;
+    public AudioSource shoot;
+
+    public float cooldown = .5f;
     bool isInCooldown = false;
 
     void Start()
@@ -32,14 +33,15 @@ public class RotateToFaceMouse : MonoBehaviour
 
         transform.position = attachPoint.position;
 
-        if (Input.GetButton("Fire1") && !isInCooldown && ammo > 0)
+        if (Input.GetButton("Fire1") && !isInCooldown)
         {
             GameObject bulletObject = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
             bulletObject.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
-
-            ammo--;
+            shoot.Play();
+            
             isInCooldown = true;
             Invoke("ResetCooldown", cooldown);
+
         }
 
         //rotate sprite
@@ -54,14 +56,5 @@ public class RotateToFaceMouse : MonoBehaviour
         isInCooldown = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //random ammo amount
-        if (collision.gameObject.CompareTag("Ammo"))
-        {
-            ammo += Random.Range(3, 5);
-            Destroy(collision.gameObject);
-        }
-    }
 }
 
