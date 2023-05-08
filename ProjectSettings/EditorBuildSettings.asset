@@ -9,9 +9,45 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Megan/MeganLevel.unity
+    path: Assets/Peter/Scenes/Menu.unity
+    guid: 44a3051fc8a68aa4b81a656fc6f8f870
+  - enabled: 1
+    path: Assets/Peter/Scenes/AltMenu.unity
+    guid: 77ae08af410d07e439d3a6ba6a82adcf
+  - enabled: 1
+    path: Assets/Megan/Scene/MeganLevel.unity
     guid: ae1e4fb5fbf0fca4aa45e8aded6b5204
   - enabled: 1
-    path: Assets/Megan/LevelComplete.unity
+    path: Assets/Megan/Scene/LevelComplete.unity
     guid: 2113a2dfc4689be498d3c06f2493e4d9
+  - enabled: 1
+    path: Assets/Peter/Scenes/PeterLevel.unity
+    guid: c73be18957c1b5749be03cf745000093
+  - enabled: 1
+    path: Assets/Peter/Scenes/Victory.unity
+    guid: 98afd6f2903b56444a6b37654ec8cb7c
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene1.unity
+    guid: d5d17e496c533784aaf9cf336654976d
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene2.unity
+    guid: da83d28508ee07e408c0e7c6760c529a
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene3.unity
+    guid: 2ae933d8a87954b4ba71a98160ee44b6
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene4.unity
+    guid: a42be35c8a9e33c4e91a819372ab56ce
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene5.unity
+    guid: 3f9f85cbfead56f42a7c972e50c9ef0a
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene6.unity
+    guid: 22d274addef840d4d8e93fa6d40f29a7
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene7.unity
+    guid: 6d55058136743e04a87c963b79a930a2
+  - enabled: 1
+    path: Assets/Peter/Scenes/Cutscene8.unity
+    guid: be54cb64721655c4ba33b4a2b415c2e8
   m_configObjects: {}
